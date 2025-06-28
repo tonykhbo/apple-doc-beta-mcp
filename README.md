@@ -13,39 +13,30 @@ A Model Context Protocol (MCP) server that provides seamless access to Apple's D
 
 ## 📦 Installation
 
-```bash
-# Clone the repository
-git clone https://github.com/MightyDillah/apple-doc-mcp.git
-cd apple-doc-mcp
-
-# Install dependencies (automatically builds via postinstall)
-npm install
-```
+**No installation needed!** MCP clients handle everything automatically using `npx`.
 
 ## 🔌 Quick Setup
 
-### Step 1: Install (above)
-
-### Step 2: Configure Your AI Assistant
+### Step 1: Configure Your AI Assistant
 
 **Claude Desktop**: Edit `~/.config/claude/claude_desktop_config.json`
 **Cursor**: Settings (`Cmd/Ctrl + ,`) → Extensions → MCP
 **Continue.dev**: Edit `~/.continue/config.json`
 **VS Code (Claude)**: Settings → MCP Servers
 
-Add this configuration (update the path):
+Add this configuration:
 ```json
 {
   "mcpServers": {
     "apple-doc-mcp": {
-      "command": "node",
-      "args": ["/absolute/path/to/apple-doc-mcp/dist/index.js"]
+      "command": "npx",
+      "args": ["apple-doc-mcp"]
     }
   }
 }
 ```
 
-### Step 3: Restart & Test
+### Step 2: Restart & Test
 1. Restart your AI assistant
 2. Try: "List available Apple technologies"
 3. You should see 4 new tools available
@@ -105,8 +96,8 @@ Get detailed documentation for a specific symbol.
 
 **Server Won't Start**
 - Ensure Node.js 18+ is installed
-- Check that build completed: `npm run build`
-- Use absolute paths in MCP config
+- Check your MCP configuration syntax
+- Restart your AI assistant after config changes
 
 **No Results Found**
 - Try broader search terms
@@ -140,7 +131,3 @@ Found a bug or want to add a feature? Contributions welcome!
 3. Submit a pull request
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
-
----
-
-**Powered by reverse-engineered Apple Developer Documentation APIs** 🍎 
