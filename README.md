@@ -13,7 +13,29 @@ A Model Context Protocol (MCP) server that provides seamless access to Apple's D
 
 ## 📦 Installation
 
-**No installation needed!** MCP clients handle everything automatically using `npx`.
+### Option 1: Direct Usage (Recommended)
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/MightyDillah/apple-doc-mcp.git
+   cd apple-doc-mcp
+   ```
+
+2. Install dependencies and build:
+   ```bash
+   npm install
+   npm run build
+   ```
+
+### Option 2: Enable npx Usage (Optional)
+If you want to use `npx apple-doc-mcp` instead of the direct path:
+```bash
+git clone https://github.com/MightyDillah/apple-doc-mcp.git
+cd apple-doc-mcp
+npm install
+npm run build
+npm link
+```
+*This creates a local symlink so `npx apple-doc-mcp` works on your system.*
 
 ## 🔌 Quick Setup
 
@@ -24,7 +46,20 @@ A Model Context Protocol (MCP) server that provides seamless access to Apple's D
 **Continue.dev**: Edit `~/.continue/config.json`
 **VS Code (Claude)**: Settings → MCP Servers
 
-Add this configuration:
+#### For Direct Usage:
+```json
+{
+  "mcpServers": {
+    "apple-doc-mcp": {
+      "command": "node",
+      "args": ["/path/to/apple-doc-mcp/dist/index.js"]
+    }
+  }
+}
+```
+*Replace `/path/to/apple-doc-mcp` with the actual path to your cloned repository.*
+
+#### For npx Usage (after `npm link`):
 ```json
 {
   "mcpServers": {
@@ -96,8 +131,16 @@ Get detailed documentation for a specific symbol.
 
 **Server Won't Start**
 - Ensure Node.js 18+ is installed
+- For direct usage: Verify the path in your MCP config points to the correct `dist/index.js` location
+- For npx usage: Make sure you've run `npm link` in the project directory
 - Check your MCP configuration syntax
 - Restart your AI assistant after config changes
+
+**"0 tools" Showing Up**
+- This usually means the server isn't starting properly
+- Check the file path in your configuration is correct and absolute
+- Make sure you've run `npm run build` to create the `dist` directory
+- Try testing the server directly: `node /path/to/apple-doc-mcp/dist/index.js`
 
 **No Results Found**
 - Try broader search terms
