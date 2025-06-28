@@ -13,7 +13,6 @@ A Model Context Protocol (MCP) server that provides seamless access to Apple's D
 
 ## 📦 Installation
 
-### Option 1: Direct Usage (Recommended)
 1. Clone this repository:
    ```bash
    git clone https://github.com/MightyDillah/apple-doc-mcp.git
@@ -26,17 +25,6 @@ A Model Context Protocol (MCP) server that provides seamless access to Apple's D
    npm run build
    ```
 
-### Option 2: Enable npx Usage (Optional)
-If you want to use `npx apple-doc-mcp` instead of the direct path:
-```bash
-git clone https://github.com/MightyDillah/apple-doc-mcp.git
-cd apple-doc-mcp
-npm install
-npm run build
-npm link
-```
-*This creates a local symlink so `npx apple-doc-mcp` works on your system.*
-
 ## 🔌 Quick Setup
 
 ### Step 1: Configure Your AI Assistant
@@ -46,7 +34,6 @@ npm link
 **Continue.dev**: Edit `~/.continue/config.json`
 **VS Code (Claude)**: Settings → MCP Servers
 
-#### For Direct Usage:
 ```json
 {
   "mcpServers": {
@@ -58,18 +45,6 @@ npm link
 }
 ```
 *Replace `/path/to/apple-doc-mcp` with the actual path to your cloned repository.*
-
-#### For npx Usage (after `npm link`):
-```json
-{
-  "mcpServers": {
-    "apple-doc-mcp": {
-      "command": "npx",
-      "args": ["apple-doc-mcp"]
-    }
-  }
-}
-```
 
 ### Step 2: Restart & Test
 1. Restart your AI assistant
@@ -132,7 +107,7 @@ Get detailed documentation for a specific symbol.
 **Server Won't Start**
 - Ensure Node.js 18+ is installed
 - For direct usage: Verify the path in your MCP config points to the correct `dist/index.js` location
-- For npx usage: Make sure you've run `npm link` in the project directory
+
 - Check your MCP configuration syntax
 - Restart your AI assistant after config changes
 
