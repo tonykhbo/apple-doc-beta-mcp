@@ -51,28 +51,40 @@ A Model Context Protocol (MCP) server that provides seamless access to Apple's D
 2. Try: "List available Apple technologies"
 3. You should see 4 new tools available
 
-## 🎯 Usage Examples
+## 🎯 How to Use
 
-### Basic Framework Exploration
-```
-User: Show me what's available in SwiftUI
-AI: I'll browse the SwiftUI framework for you.
-[Uses browse_framework]
-```
+Once configured, just talk naturally to your AI assistant. Here are examples:
 
-### Smart Search with Wildcards
+### Browse Available Technologies
 ```
-User: Find all broadcast-related classes in ReplayKit
-AI: I'll search for broadcast symbols in ReplayKit.
-[Uses search_symbols with "broadcast*"]
+"Use apple-doc-mcp to list all current Apple frameworks"
+"Get the latest available Apple technologies from Apple's docs"
+"Search Apple documentation for all available frameworks"
 ```
 
-### Cross-Framework Search
+### Explore a Framework
 ```
-User: Show me all View-related symbols across Apple frameworks
-AI: I'll search for View symbols across all frameworks.
-[Uses search_symbols with "*View*"]
+"Use apple-doc-mcp to browse SwiftUI framework structure"
+"Get current UIKit topics from Apple documentation"
+"Search Apple docs for Foundation framework details"
 ```
+
+### Search for Specific APIs
+```
+"Search Apple's SwiftUI docs for drag and drop APIs"
+"Use apple-doc-mcp to find RPBroadcast* classes in ReplayKit"
+"Look up current *View* symbols across Apple frameworks"
+"Find all *Controller classes in UIKit using Apple docs"
+```
+
+### Get Detailed Documentation
+```
+"Get the latest SwiftUI View protocol docs from Apple"
+"Use apple-doc-mcp to look up UIViewController documentation"
+"Search Apple's current docs for NSURLSession details"
+```
+
+The AI will automatically use the MCP tools to fetch current Apple documentation and provide comprehensive answers.
 
 ## 🛠️ Available Tools
 
