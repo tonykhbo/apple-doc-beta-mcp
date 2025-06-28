@@ -55,21 +55,21 @@ A Model Context Protocol (MCP) server that provides seamless access to Apple's D
 
 ### Basic Framework Exploration
 ```
-Human: Show me what's available in SwiftUI
+User: Show me what's available in SwiftUI
 AI: I'll browse the SwiftUI framework for you.
 [Uses browse_framework]
 ```
 
 ### Smart Search with Wildcards
 ```
-Human: Find all broadcast-related classes in ReplayKit
+User: Find all broadcast-related classes in ReplayKit
 AI: I'll search for broadcast symbols in ReplayKit.
 [Uses search_symbols with "broadcast*"]
 ```
 
 ### Cross-Framework Search
 ```
-Human: Show me all View-related symbols across Apple frameworks
+User: Show me all View-related symbols across Apple frameworks
 AI: I'll search for View symbols across all frameworks.
 [Uses search_symbols with "*View*"]
 ```
