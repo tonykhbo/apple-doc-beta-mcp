@@ -118,14 +118,8 @@ export class AppleDevDocsClient {
         tech => tech.kind === 'symbol' && tech.role === 'collection'
       );
 
-      // Search through popular frameworks first
-      const priorityFrameworks = frameworks.filter(f => 
-        ['SwiftUI', 'UIKit', 'Foundation', 'AppKit', 'ReplayKit', 'AVFoundation'].includes(f.title)
-      );
-      
-      const searchFrameworks = [...priorityFrameworks, ...frameworks.filter(f => 
-        !priorityFrameworks.includes(f)
-      )].slice(0, 20); // Limit to avoid API abuse
+      // Use all available frameworks (limited to avoid API abuse)
+      const searchFrameworks = frameworks.slice(0, 20); // Limit to avoid API abuse
 
       for (const framework of searchFrameworks) {
         if (results.length >= maxResults) break;

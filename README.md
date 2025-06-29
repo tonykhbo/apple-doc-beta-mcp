@@ -2,6 +2,20 @@
 
 A Model Context Protocol (MCP) server that provides seamless access to Apple's Developer Documentation directly within your AI coding assistant.
 
+## 📋 Changelog
+
+### 1.0.1 Update
+- **🎯 Intelligent Fallback System**: When searching for frameworks instead of symbols (e.g., "SwiftUI"), the server now provides helpful framework information and guidance on correct usage
+- **🔧 Tool Consolidation**: Streamlined from 4 tools to 4 focused tools:
+  - `list_technologies` - Browse all Apple frameworks
+  - `get_documentation` - Get symbol or framework docs (handles both automatically)
+  - `search_symbols` - Search with wildcards and filters 
+  - `check_updates` - Check for repository updates via git
+- **🚀 Pre-built Distribution**: No more manual building required - clone and use immediately
+- **🧹 Dynamic Framework Discovery**: Removed all hard-coded framework lists for fully dynamic operation
+- **⚡ Automatic Update Notifications**: Server automatically checks for updates on startup and notifies users when new versions are available
+- **🛡️ Enhanced Error Handling**: Better null safety and professional error messages
+
 ## 🚀 Features
 
 - **🔍 Smart Search**: Find symbols across all Apple frameworks with wildcard support (`*`, `?`)
@@ -9,6 +23,7 @@ A Model Context Protocol (MCP) server that provides seamless access to Apple's D
 - **📖 Detailed Documentation**: Get comprehensive symbol documentation with examples
 - **🎯 Advanced Filtering**: Filter by platform (iOS, macOS, etc.), symbol type, or framework
 - **⚡ Real-time Data**: Always up-to-date with Apple's latest documentation
+- **🔄 Auto-Update Alerts**: Automatic notifications when repository updates are available
 - **🧠 AI-Optimized**: Clean markdown output perfect for AI assistants
 
 ## 📦 Installation
@@ -19,10 +34,9 @@ A Model Context Protocol (MCP) server that provides seamless access to Apple's D
    cd apple-doc-mcp
    ```
 
-2. Install dependencies and build:
+2. Ready to use! (Pre-built distribution included)
    ```bash
-   npm install
-   npm run build
+   # No build step required - just configure your MCP client
    ```
 
 ## 🔌 Quick Setup
@@ -50,6 +64,7 @@ A Model Context Protocol (MCP) server that provides seamless access to Apple's D
 1. Restart your AI assistant
 2. Try: "List available Apple technologies"
 3. You should see 4 new tools available
+4. The server will automatically notify you if updates are available on startup
 
 ## 🎯 How to Use
 
@@ -91,9 +106,16 @@ The AI will automatically use the MCP tools to fetch current Apple documentation
 ### `list_technologies`
 Browse all available Apple frameworks and technologies.
 
-### `browse_framework`
-Explore the structure and topics of a specific framework.
-- `framework` (required): Framework name (e.g., "SwiftUI", "UIKit")
+### `get_documentation`
+Get detailed documentation for symbols or frameworks (automatically detects type).
+- `path` (required): Documentation path (e.g., "documentation/SwiftUI/View") or framework name (e.g., "SwiftUI")
+
+**Examples**:
+```json
+{"path": "SwiftUI"}
+{"path": "documentation/SwiftUI/View"}
+{"path": "Foundation"}
+```
 
 ### `search_symbols`
 Search for symbols across Apple frameworks with advanced filtering.
@@ -110,23 +132,24 @@ Search for symbols across Apple frameworks with advanced filtering.
 {"query": "*View*", "platform": "iOS", "maxResults": 5}
 ```
 
-### `get_symbol`
-Get detailed documentation for a specific symbol.
-- `path` (required): Documentation path (e.g., "documentation/SwiftUI/View")
+### `check_updates`
+Check for available updates from the git repository.
+- No parameters required
+- Shows current branch status, available updates, and update instructions
+- **Note**: The server automatically checks for updates on startup and displays notifications
 
 ## 🚨 Troubleshooting
 
 **Server Won't Start**
 - Ensure Node.js 18+ is installed
-- For direct usage: Verify the path in your MCP config points to the correct `dist/index.js` location
-
+- Verify the path in your MCP config points to the correct `dist/index.js` location
 - Check your MCP configuration syntax
 - Restart your AI assistant after config changes
 
 **"0 tools" Showing Up**
 - This usually means the server isn't starting properly
 - Check the file path in your configuration is correct and absolute
-- Make sure you've run `npm run build` to create the `dist` directory
+- The `dist` directory is included - no build step required
 - Try testing the server directly: `node /path/to/apple-doc-mcp/dist/index.js`
 
 **No Results Found**
