@@ -202,14 +202,20 @@ class AppleDevDocsMcpServer {
         try {
             const technologies = await this.client.getTechnologies();
             // Extract potential framework name from path
-            const cleanPath = path.replace(/^documentation\//, '').toLowerCase();
+            const cleanPath = path.replace(/^documentation\//, '');
             const pathParts = cleanPath.split('/');
             const potentialFramework = pathParts[0];
-            // Check if it matches any technology
+            // Check if it matches any technology (case-insensitive)
             for (const tech of Object.values(technologies)) {
                 if (tech && tech.title) {
-                    if (tech.title.toLowerCase() === potentialFramework ||
-                        tech.title.toLowerCase() === cleanPath) {
+                    // Check exact match (case-insensitive)
+                    if (tech.title.toLowerCase() === potentialFramework.toLowerCase() ||
+                        tech.title.toLowerCase() === cleanPath.toLowerCase()) {
+                        return tech.title;
+                    }
+                    // Also check with spaces removed (e.g., "Foundation Models" -> "foundationmodels")
+                    if (tech.title.toLowerCase().replace(/\s+/g, '') === potentialFramework.toLowerCase().replace(/\s+/g, '') ||
+                        tech.title.toLowerCase().replace(/\s+/g, '') === cleanPath.toLowerCase().replace(/\s+/g, '')) {
                         return tech.title;
                     }
                 }

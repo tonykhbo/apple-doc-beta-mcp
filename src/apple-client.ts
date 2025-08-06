@@ -86,19 +86,34 @@ export class AppleDevDocsClient {
   }
 
   async getTechnologies(): Promise<Record<string, Technology>> {
-    const url = `${BASE_URL}/documentation/technologies.json`;
+    const url = `${BASE_URL}/documentation.json`;
     const data = await this.makeRequest<any>(url);
     return data.references || {};
   }
 
   async getFramework(frameworkName: string): Promise<FrameworkData> {
-    const url = `${BASE_URL}/documentation/${frameworkName}.json`;
+    // Remove spaces from framework names for URL (e.g., "Foundation Models" -> "foundationmodels")
+    const urlSafeName = frameworkName.toLowerCase().replace(/\s+/g, '');
+    const url = `${BASE_URL}/documentation/${urlSafeName}.json`;
     return await this.makeRequest<FrameworkData>(url);
   }
 
   async getSymbol(path: string): Promise<SymbolData> {
     // Remove leading slash if present
-    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    let cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    
+    // Handle spaces in path segments (e.g., "Foundation Models" -> "foundationmodels")
+    // Split path, process each segment, then rejoin
+    const segments = cleanPath.split('/');
+    const processedSegments = segments.map((segment, index) => {
+      // Only process the framework name (first segment after 'documentation')
+      if (index === 1 || (index === 0 && !segment.toLowerCase().startsWith('documentation'))) {
+        return segment.toLowerCase().replace(/\s+/g, '');
+      }
+      return segment;
+    });
+    cleanPath = processedSegments.join('/');
+    
     const url = `${BASE_URL}/${cleanPath}.json`;
     return await this.makeRequest<SymbolData>(url);
   }
@@ -156,7 +171,7 @@ export class AppleDevDocsClient {
       const framework = await this.getFramework(frameworkName);
       const searchPattern = this.createSearchPattern(query);
       
-      Object.entries(framework.references).forEach(([id, ref]) => {
+      Object.entries(framework.references).forEach(([, ref]) => {
         if (results.length >= maxResults) return;
         
         if (this.matchesSearch(ref, searchPattern, options)) {
